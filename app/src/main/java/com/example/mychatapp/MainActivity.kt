@@ -3,6 +3,7 @@ package com.example.mychatapp
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
@@ -22,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Get Nav Controller and ActionBar
-        val navController = findNavController(R.id.nav_host_fragment)
+        //Find view by iD for navHost Fragment then getting navController
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
 
         //Setup Default ActionBar with Navigation UI
