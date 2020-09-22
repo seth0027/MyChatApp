@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layout_padding"
+    tools:context=".main.MainFragment">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toTopOf="@+id/chat_field"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/chat_field"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+
+        android:hint="@string/textfield_label"
+        android:paddingHorizontal="@dimen/layout_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toStartOf="@+id/send_button"
+        app:layout_constraintStart_toEndOf="@+id/insert_icon" />
+
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/insert_icon"
+        android:layout_width="@dimen/send_icon_size"
+        android:layout_height="@dimen/send_icon_size"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="@string/button_text"
+        app:icon="@drawable/ic_baseline_send_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
