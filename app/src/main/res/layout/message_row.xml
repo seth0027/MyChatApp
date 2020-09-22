@@ -14,7 +14,12 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/message_padding"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+       >
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/message_author"
@@ -25,6 +30,7 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:padding="@dimen/message_padding"
 
 
             />
@@ -38,15 +44,23 @@
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
 
-            app:layout_constraintTop_toBottomOf="@+id/message_author" />
+            app:layout_constraintTop_toBottomOf="@+id/message_author"
+            android:padding="@dimen/message_padding"
+            />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message_author"
-            tools:src="@drawable/ic_baseline_insert_photo_24" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/message_author"
+
+            tools:src="@drawable/ic_baseline_insert_photo_24"
+
+
+            android:padding="@dimen/message_padding"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,19 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/layout_padding"
-    tools:context=".main.MainFragment">
+    tools:context=".ui.main.MainFragment">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:foregroundGravity="center"
+        android:progressBackgroundTint="@color/colorAccent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+
         android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/chat_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:itemCount="1"
 
         />
 
@@ -39,12 +53,15 @@
         android:id="@+id/insert_icon"
         android:layout_width="@dimen/send_icon_size"
         android:layout_height="@dimen/send_icon_size"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
+
+
         android:focusable="true"
+
         app:layout_constraintBottom_toBottomOf="parent"
 
         app:layout_constraintStart_toStartOf="parent"
-
         app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
 
     <com.google.android.material.button.MaterialButton
@@ -52,6 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
+        android:enabled="false"
+        android:hapticFeedbackEnabled="true"
         android:text="@string/button_text"
         app:icon="@drawable/ic_baseline_send_24"
         app:layout_constraintBottom_toBottomOf="parent"
