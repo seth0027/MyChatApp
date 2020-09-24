@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.mychatapp.ChatsViewModel
 import com.example.mychatapp.databinding.FragmentMainBinding
@@ -26,12 +25,12 @@ class MainFragment : Fragment() {
         //setting viewModel
         binding.viewModel = viewModel
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         //Set the adapter to MyAdapter and submit the List.
         binding.recyclerView.adapter = MyAdapter()
 
-        viewModel.chatList.observe(viewLifecycleOwner,  {
+        viewModel.chatList.observe(viewLifecycleOwner, {
             val adapter = binding.recyclerView.adapter as MyAdapter
 
 
