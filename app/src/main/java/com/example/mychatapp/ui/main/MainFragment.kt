@@ -35,6 +35,7 @@ class MainFragment : Fragment() {
 
 
             adapter.submitList(it)
+
         })
 
 

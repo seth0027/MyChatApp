@@ -17,14 +17,7 @@ class ChatsViewModel : ViewModel() {
 
     val isClickable = MutableLiveData<Boolean>()
 
-    private var messageTextLive = MutableLiveData<String>()
-
-    var messageText: String
-        get() = messageTextLive.value ?: ""
-        set(value) {
-            isClickable.value = value.trim().isNotEmpty()
-            messageTextLive.value = value
-        }
+    val messageTextLive = MutableLiveData<String>()
 
 
     init {
@@ -32,6 +25,11 @@ class ChatsViewModel : ViewModel() {
         isClickable.value = false
         getInProgress()
         loadChatList()
+
+        //Keep track of the edit txt content to make button clickable or no
+        messageTextLive.observeForever {
+            isClickable.value = it.trim().isNotEmpty()
+        }
     }
 
 
@@ -41,13 +39,13 @@ class ChatsViewModel : ViewModel() {
 
         //MockList
 
-       Handler(Looper.myLooper()!!).postDelayed({
+        Handler(Looper.myLooper()!!).postDelayed({
 
             val localChatList = mutableListOf<ChatMessage>(
-                ChatMessage("HEY", "annonymous1"),
-                ChatMessage("hello", "unknown"), ChatMessage
-                    ("Whats UPP", "UKnow")
+                ChatMessage("HEY", "annonymous1")
             )
+
+
 
             chatList.value = localChatList
 
@@ -61,14 +59,20 @@ class ChatsViewModel : ViewModel() {
     fun onSend() {
 
         val chatMessage = ChatMessage(messageTextLive.value!!, "Tester")
-        chatList.value!!.add(chatMessage)
+
+        val newList = mutableListOf<ChatMessage>()
+        chatList.value?.let { newList.addAll(it) }
+        newList.add(chatMessage)
+
+        chatList.value = newList
         clearMessageText()
 
 
     }
-    private fun clearMessageText(){
-        this.messageTextLive.value=""
-        messageText=""
+
+    private fun clearMessageText() {
+        this.messageTextLive.value = ""
+
     }
 
 

@@ -23,7 +23,7 @@ class MyAdapter() :
 
         //Check if item contents are same
         override fun areContentsTheSame(oldItem: ChatMessage, newItem: ChatMessage): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.name == newItem.name && oldItem.text == newItem.text
         }
     }
 

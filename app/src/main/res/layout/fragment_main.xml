@@ -53,9 +53,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
 
+
             android:hint="@string/textfield_label"
             android:paddingHorizontal="@dimen/layout_padding"
-            android:text="@={viewModel.messageText}"
+            android:text="@={viewModel.messageTextLive}"
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintEnd_toStartOf="@+id/send_button"
