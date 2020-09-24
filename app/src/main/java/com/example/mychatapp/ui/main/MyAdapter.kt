@@ -6,23 +6,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mychatapp.databinding.MessageRowBinding
+import com.example.mychatapp.model.ChatMessage
 
 
-class MyAdapter(private val dataList: List<String>) :
-    ListAdapter<String, MyAdapter.ListViewHolder>(DiffCallback) {
+class MyAdapter() :
+    ListAdapter<ChatMessage, MyAdapter.ListViewHolder>(DiffCallback) {
 
 
     //Diffing for List Changes
-    companion object DiffCallback : DiffUtil.ItemCallback<String>() {
+    object DiffCallback : DiffUtil.ItemCallback<ChatMessage>() {
 
         //Check if items are same
-        override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        override fun areItemsTheSame(oldItem: ChatMessage, newItem: ChatMessage): Boolean {
             return oldItem == newItem
         }
 
         //Check if item contents are same
-        override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
-            return oldItem == newItem
+        override fun areContentsTheSame(oldItem: ChatMessage, newItem: ChatMessage): Boolean {
+            return oldItem.name == newItem.name
         }
     }
 
@@ -33,9 +34,10 @@ class MyAdapter(private val dataList: List<String>) :
     // Each data item is just a string in this case that is shown in a TextView.
     class ListViewHolder(private val binding: MessageRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(listItem: String) {
-            binding.item = listItem
+        fun bind(chatItem: ChatMessage) {
+            binding.item = chatItem
 
+            //Let the UI know to execute previous bindings
             binding.executePendingBindings()
         }
 
@@ -62,6 +64,5 @@ class MyAdapter(private val dataList: List<String>) :
         holder.bind(item)
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = dataList.size
+
 }

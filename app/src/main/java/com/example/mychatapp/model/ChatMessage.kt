@@ -1,3 +1,3 @@
 package com.example.mychatapp.model
 
-data class ChatMessage(private val text:String,private val name:String,private val photoUrl:String)
+data class ChatMessage(val text: String, val name: String, val photoUrl: String?=null)

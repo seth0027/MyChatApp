@@ -8,10 +8,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.mychatapp.databinding.ActivityMainBinding
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        // Access a Cloud Firestore instance from your Activity
+//        val db = Firebase.firestore
 
 
         super.onCreate(savedInstanceState)

@@ -1,83 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/layout_padding"
-    tools:context=".ui.main.MainFragment">
 
-    <androidx.core.widget.ContentLoadingProgressBar
-        style="@style/Widget.AppCompat.ProgressBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:foregroundGravity="center"
-        android:progressBackgroundTint="@color/colorAccent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<layout>
 
+    <data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        <import type="android.view.View" />
 
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/chat_field"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:itemCount="1"
+        <variable
+            name="viewModel"
+            type="com.example.mychatapp.ChatsViewModel" />
+    </data>
 
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/layout_padding"
+        tools:context=".ui.main.MainFragment">
+
+        <androidx.core.widget.ContentLoadingProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:foregroundGravity="center"
+            android:progressBackgroundTint="@color/colorAccent"
+            android:visibility="@{viewModel.inProgress ? View.VISIBLE : View.GONE }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/chat_field"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
 
-        android:hint="@string/textfield_label"
-        android:paddingHorizontal="@dimen/layout_padding"
-        app:layout_constraintBottom_toBottomOf="parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toTopOf="@+id/chat_field"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="1"
 
-        app:layout_constraintEnd_toStartOf="@+id/send_button"
-        app:layout_constraintStart_toEndOf="@+id/insert_icon" />
-
-
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/insert_icon"
-        android:layout_width="@dimen/send_icon_size"
-        android:layout_height="@dimen/send_icon_size"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:clickable="true"
+            />
 
 
-        android:focusable="true"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/chat_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
 
-        app:layout_constraintBottom_toBottomOf="parent"
+            android:hint="@string/textfield_label"
+            android:paddingHorizontal="@dimen/layout_padding"
+            android:text="@={viewModel.messageText}"
+            app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:enabled="false"
-        android:hapticFeedbackEnabled="true"
-        android:text="@string/button_text"
-        app:icon="@drawable/ic_baseline_send_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/send_button"
+            app:layout_constraintStart_toEndOf="@+id/insert_icon" />
 
 
-        />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/insert_icon"
+            android:layout_width="@dimen/send_icon_size"
+            android:layout_height="@dimen/send_icon_size"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:focusable="true"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/ic_baseline_insert_photo_24" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/send_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:enabled="@{viewModel.isClickable}"
+            android:hapticFeedbackEnabled="true"
+            android:onClick="@{()-> viewModel.onSend()}"
+            android:text="@string/button_text"
+
+            app:icon="@drawable/ic_baseline_send_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

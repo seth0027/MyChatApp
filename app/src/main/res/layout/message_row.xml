@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="String" />
+            type="com.example.mychatapp.model.ChatMessage" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -26,7 +26,7 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@{item}"
+            android:text="@{item.name}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +40,7 @@
             style="@style/TextAppearance.MaterialComponents.Subtitle2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:text="@{item}"
+            android:text="@{item.text}"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle2"
             app:layout_constraintStart_toStartOf="parent"
 
