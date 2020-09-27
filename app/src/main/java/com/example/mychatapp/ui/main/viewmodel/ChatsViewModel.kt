@@ -1,15 +1,17 @@
-package com.example.mychatapp
+package com.example.mychatapp.ui.main.viewmodel
 
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.mychatapp.model.ChatMessage
+import com.example.mychatapp.ui.main.repository.ChatMessagesLiveData
 
 class ChatsViewModel : ViewModel() {
 
 
     val chatList = MutableLiveData<MutableList<ChatMessage>>()
+
 
 
     val inProgress = MutableLiveData<Boolean>()
@@ -19,6 +21,10 @@ class ChatsViewModel : ViewModel() {
 
     val messageTextLive = MutableLiveData<String>()
 
+    private var observer = { it: String ->
+        isClickable.value = it.trim().isNotEmpty()
+    }
+
 
     init {
 
@@ -26,10 +32,11 @@ class ChatsViewModel : ViewModel() {
         getInProgress()
         loadChatList()
 
+
         //Keep track of the edit txt content to make button clickable or no
-        messageTextLive.observeForever {
-            isClickable.value = it.trim().isNotEmpty()
-        }
+        messageTextLive.observeForever(
+            observer
+        )
     }
 
 
@@ -60,6 +67,17 @@ class ChatsViewModel : ViewModel() {
 
         val chatMessage = ChatMessage(messageTextLive.value!!, "Tester")
 
+
+//// Add a new document with a generated ID
+//        db.collection("users")
+//            .add(user)
+//            .addOnSuccessListener { documentReference ->
+//                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//                Log.w(TAG, "Error adding document", e)
+//            }
+
         val newList = mutableListOf<ChatMessage>()
         chatList.value?.let { newList.addAll(it) }
         newList.add(chatMessage)
@@ -80,5 +98,10 @@ class ChatsViewModel : ViewModel() {
         inProgress.value = chatList.value == null || chatList.value!!.size <= 0
     }
 
+    //Making sure to remove observer
+    override fun onCleared() {
+        super.onCleared()
 
+        messageTextLive.removeObserver(observer)
+    }
 }

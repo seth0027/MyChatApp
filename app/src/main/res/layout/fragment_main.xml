@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.mychatapp.ChatsViewModel" />
+            type="com.example.mychatapp.ui.main.viewmodel.ChatsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

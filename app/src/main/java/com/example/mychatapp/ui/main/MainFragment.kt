@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.example.mychatapp.ChatsViewModel
+import com.example.mychatapp.ui.main.viewmodel.ChatsViewModel
 import com.example.mychatapp.databinding.FragmentMainBinding
+import com.example.mychatapp.ui.main.listadapter.MyAdapter
 
 class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding

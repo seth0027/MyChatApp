@@ -1,4 +1,4 @@
-package com.example.mychatapp.ui.main
+package com.example.mychatapp.ui.main.listadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ class MyAdapter() :
 
         //Check if item contents are same
         override fun areContentsTheSame(oldItem: ChatMessage, newItem: ChatMessage): Boolean {
-            return oldItem.name == newItem.name && oldItem.text == newItem.text
+            return oldItem.name == newItem.name
         }
     }
 
